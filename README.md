@@ -30,9 +30,16 @@ Example:
         android:layout_width="match_parent"
         android:layout_height="match_parent" />     
 ```       
-
 Note: 'android:id' is mandatory! It's the reference in your firebase database.
 
+Now you have to instantiate the FireLayout:
+```java
+...
+FirebaseDatabase database = FirebaseDatabase.getInstance();
+FireLayout fireLayout = (FireLayout) findViewById(R.id.fire1);
+fireLayout.init(database);
+...
+```
 Now you're ready to build your own layout! 
 
 Example:
