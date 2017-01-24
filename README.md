@@ -38,7 +38,7 @@ Example:
         "textview": {
           "layout_width": "match_parent",
           "layout_height": "wrap_content",
-          "text": "ciao FireLayout",
+          "text": "Hi FireLayout",
           "textColor": "#FFFFFF",
           "background": "#404040"
         },
