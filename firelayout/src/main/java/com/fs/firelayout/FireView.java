@@ -42,7 +42,7 @@ public abstract class FireView {
         view.setLayoutParams(marginLayoutParams);
     }
 
-    int getSize(Object size) {
+    private int getSize(Object size) {
         if (size != null) {
             if (size instanceof Integer)
                 return (int) size;
