@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/FStranieri/FireLayout'
     gitUrl = 'https://github.com/FStranieri/FireLayout.git'
 
-    libraryVersion = '0.1'
+    libraryVersion = '0.1.1'
 
     developerId = 'fstranieri'
     developerName = 'Francesco Stranieri'
@@ -31,7 +31,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
-        versionName "0.1"
+        versionName "0.1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
