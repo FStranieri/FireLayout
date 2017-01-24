@@ -23,22 +23,18 @@ public class FireLayout extends CoordinatorLayout {
 
     public FireLayout(Context context) {
         super(context);
-        init();
     }
 
     public FireLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
     public FireLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
     }
 
-    private void init() {
+    public void init(FirebaseDatabase firebaseDatabase) {
         if (getId() != NO_ID) {
-            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
             String id = getResources().getResourceName(getId());
             DatabaseReference databaseReference = firebaseDatabase.getReference(id.substring(id.lastIndexOf("/")));
 
