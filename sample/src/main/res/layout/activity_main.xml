@@ -9,6 +9,7 @@
     tools:context="com.fs.firelayout.MainActivity">
 
     <com.fs.firelayout.FireLayout
+        android:id="@+id/fire1"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </RelativeLayout>

@@ -35,29 +35,34 @@ public abstract class FireView {
         view.setVisibility(getVisibility());
     }
 
-    private void resolveLayoutParams()
-    {
-        int width = ViewGroup.LayoutParams.WRAP_CONTENT, height = ViewGroup.LayoutParams.WRAP_CONTENT;
-        Object w, h;
-
-        if ((w = map.get("layout_width")) != null && w instanceof Integer)
-            width = (Integer) w;
-
-        if ((h = map.get("layout_height")) != null && h instanceof Integer)
-            height = (Integer) h;
-
-        ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(width, height);
+    private void resolveLayoutParams() {
+        ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(getSize(map.get("layout_width")), getSize(map.get("layout_height")));
         marginLayoutParams.setMargins(getValue("margin_left", 0), getValue("margin_top", 0), getValue("margin_right", 0), getValue("margin_bottom", 0));
 
         view.setLayoutParams(marginLayoutParams);
     }
 
+    int getSize(Object size) {
+        if (size != null) {
+            if (size instanceof Integer)
+                return (int) size;
+            else if (size instanceof String) {
+                switch ((String) size) {
+                    case "wrap_content":
+                        return ViewGroup.LayoutParams.WRAP_CONTENT;
+                    case "match_parent":
+                        return ViewGroup.LayoutParams.MATCH_PARENT;
+                }
+            }
+        }
+
+        return ViewGroup.LayoutParams.WRAP_CONTENT;
+    }
+
     int getVisibility() {
         Object visibility = map.get("visibility");
-        if(visibility != null && visibility instanceof String && !TextUtils.isEmpty((String) visibility))
-        {
-            switch ((String) visibility)
-            {
+        if (visibility != null && visibility instanceof String && !TextUtils.isEmpty((String) visibility)) {
+            switch ((String) visibility) {
                 case "gone":
                     return View.GONE;
                 case "invisible":
@@ -71,10 +76,8 @@ public abstract class FireView {
     //TODO: MORE KINDS OF GRAVITY
     protected int getGravity(String key) {
         Object gravity = map.get(key);
-        if(gravity != null && gravity instanceof String && !TextUtils.isEmpty((String) gravity))
-        {
-            switch ((String) gravity)
-            {
+        if (gravity != null && gravity instanceof String && !TextUtils.isEmpty((String) gravity)) {
+            switch ((String) gravity) {
                 case "center":
                     return Gravity.CENTER;
                 case "center_horizontal":
@@ -158,11 +161,9 @@ public abstract class FireView {
             this.isViewGroup = isViewGroup;
         }
 
-        public static FireViewGenerator getFireView(String name)
-        {
-            for(FireViewGenerator fireViewGenerator : values())
-            {
-                if(fireViewGenerator.name.equals(name.toLowerCase()))
+        public static FireViewGenerator getFireView(String name) {
+            for (FireViewGenerator fireViewGenerator : values()) {
+                if (fireViewGenerator.name.equals(name.toLowerCase()))
                     return fireViewGenerator;
             }
 
