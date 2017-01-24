@@ -4,14 +4,16 @@
 FireLayout is a CoordinatorLayout linked to its refence on your Firebase Real-Time Database. You can generate your own layout through firebase console.
 
 ## Importing with Gradle
-compile 'com.fs.firelayout:firelayout:0.1.1'
+```
+compile 'com.fs.firelayout:firelayout:0.1.11'
+```
 
 ## Importing with Maven
 ```maven
 <dependency>
   <groupId>com.fs.firelayout</groupId>
   <artifactId>firelayout</artifactId>
-  <version>0.1.1</version>
+  <version>0.1.11</version>
   <type>pom</type>
 </dependency>
 ```
