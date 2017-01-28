@@ -150,6 +150,26 @@ public abstract class FireView {
         return def;
     }
 
+    public void setEventsListener(final FireLayout.EventsListener listener)
+    {
+        if(getValue("onClick", false))
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onFireLayoutChildClicked(view);
+                }
+            });
+
+        if(getValue("onLongClick", false))
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    listener.onFireLayoutChildLongClicked(view);
+                    return false;
+                }
+            });
+    }
+
     public abstract View generateView(Context mContext);
 
     public View getView() {

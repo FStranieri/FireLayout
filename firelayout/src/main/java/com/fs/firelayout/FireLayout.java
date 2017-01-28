@@ -21,6 +21,8 @@ import java.util.HashMap;
 
 public class FireLayout extends CoordinatorLayout {
 
+    EventsListener listener;
+
     public FireLayout(Context context) {
         super(context);
     }
@@ -71,12 +73,13 @@ public class FireLayout extends CoordinatorLayout {
 
     private View getRealView(String name, HashMap<String, Object> map) {
         View view = null;
+        FireView fireview = null;
 
         FireView.FireViewGenerator fireViewGenerator = FireView.FireViewGenerator.getFireView(name);
 
         if (fireViewGenerator != null) {
             try {
-                view = (fireViewGenerator.viewClass.getConstructor(Context.class, HashMap.class).newInstance(getContext(), map)).getView();
+                fireview = (fireViewGenerator.viewClass.getConstructor(Context.class, HashMap.class).newInstance(getContext(), map));
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
@@ -86,10 +89,28 @@ public class FireLayout extends CoordinatorLayout {
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
+
+            if(fireview != null)
+            {
+                if(listener != null)
+                    fireview.setEventsListener(listener);
+
+                view = fireview.getView();
+            }
+
             if (fireViewGenerator.isViewGroup && map.get("children") != null && map.get("children") instanceof HashMap)
                 checkLayout((ViewGroup) view, (HashMap<String, Object>) map.get("children"));
         }
 
         return view;
+    }
+
+    public void setEventsListener(EventsListener listener){
+        this.listener = listener;
+    }
+
+    public interface EventsListener {
+        void onFireLayoutChildClicked(View view);
+        void onFireLayoutChildLongClicked(View view);
     }
 }
