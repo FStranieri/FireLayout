@@ -32,7 +32,7 @@ public class FireLinearLayout extends FireView {
 
     private int getOrientation()
     {
-        Object orientation = map.get("orientation");
+        Object orientation = attributesMap.get("orientation");
         if(orientation != null && orientation instanceof String && !TextUtils.isEmpty((String) orientation))
         {
             String o = (String) orientation;

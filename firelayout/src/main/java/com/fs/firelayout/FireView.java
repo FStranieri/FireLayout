@@ -14,11 +14,11 @@ import java.util.HashMap;
  */
 
 public abstract class FireView {
-    protected HashMap<String, Object> map;
+    protected HashMap<String, Object> attributesMap;
     View view;
 
     public void init(Context context, HashMap<String, Object> map) {
-        this.map = map;
+        this.attributesMap = map;
         view = generateView(context);
 
         resolveLayoutParams();
@@ -35,7 +35,7 @@ public abstract class FireView {
     }
 
     private void checkPadding() {
-        if (map.get("padding") != null) {
+        if (attributesMap.get("padding") != null) {
             int padding = getValue("padding", 0);
             view.setPadding(padding, padding, padding, padding);
         } else
@@ -43,9 +43,9 @@ public abstract class FireView {
     }
 
     private void resolveLayoutParams() {
-        ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(getSize(map.get("layout_width")), getSize(map.get("layout_height")));
+        ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(getSize(attributesMap.get("layout_width")), getSize(attributesMap.get("layout_height")));
 
-        if (map.get("margin") != null) {
+        if (attributesMap.get("margin") != null) {
             int margin = getValue("margin", 0);
             marginLayoutParams.setMargins(margin, margin, margin, margin);
         } else
@@ -72,7 +72,7 @@ public abstract class FireView {
     }
 
     int getVisibility() {
-        Object visibility = map.get("visibility");
+        Object visibility = attributesMap.get("visibility");
         if (visibility != null && visibility instanceof String && !TextUtils.isEmpty((String) visibility)) {
             switch ((String) visibility) {
                 case "gone":
@@ -87,7 +87,7 @@ public abstract class FireView {
 
     //TODO: MORE KINDS OF GRAVITY
     protected int getGravity(String key) {
-        Object gravity = map.get(key);
+        Object gravity = attributesMap.get(key);
         if (gravity != null && gravity instanceof String && !TextUtils.isEmpty((String) gravity)) {
             switch ((String) gravity) {
                 case "center":
@@ -112,7 +112,7 @@ public abstract class FireView {
 
     protected float getValue(String key, float def) {
         Object b;
-        if ((b = map.get(key)) != null && b instanceof Float)
+        if ((b = attributesMap.get(key)) != null && b instanceof Float)
             return (float) b;
 
         return def;
@@ -120,7 +120,7 @@ public abstract class FireView {
 
     protected double getValue(String key, double def) {
         Object b;
-        if ((b = map.get(key)) != null && b instanceof Double)
+        if ((b = attributesMap.get(key)) != null && b instanceof Double)
             return (double) b;
 
         return def;
@@ -128,7 +128,7 @@ public abstract class FireView {
 
     protected int getValue(String key, int def) {
         Object b;
-        if ((b = map.get(key)) != null && b instanceof Integer)
+        if ((b = attributesMap.get(key)) != null && b instanceof Integer)
             return (int) b;
 
         return def;
@@ -136,7 +136,7 @@ public abstract class FireView {
 
     protected Boolean getValue(String key, boolean def) {
         Object b;
-        if ((b = map.get(key)) != null && b instanceof Boolean)
+        if ((b = attributesMap.get(key)) != null && b instanceof Boolean)
             return (Boolean) b;
 
         return def;
@@ -144,7 +144,7 @@ public abstract class FireView {
 
     protected String getValue(String key, String def) {
         Object s;
-        if ((s = map.get(key)) != null && s instanceof String)
+        if ((s = attributesMap.get(key)) != null && s instanceof String)
             return (String) s;
 
         return def;
