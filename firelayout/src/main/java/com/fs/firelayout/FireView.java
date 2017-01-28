@@ -44,20 +44,20 @@ public abstract class FireView {
 
     private void checkPadding() {
         if (attributesMap.get("padding") != null) {
-            int padding = getValue("padding", 0);
+            int padding = getValue("padding", 0).intValue();
             view.setPadding(padding, padding, padding, padding);
         } else
-            view.setPadding(getValue("padding_left", 0), getValue("padding_top", 0), getValue("padding_right", 0), getValue("padding_bottom", 0));
+            view.setPadding(getValue("padding_left", 0).intValue(), getValue("padding_top", 0).intValue(), getValue("padding_right", 0).intValue(), getValue("padding_bottom", 0).intValue());
     }
 
     private void resolveLayoutParams() {
         ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(getSize(attributesMap.get("layout_width")), getSize(attributesMap.get("layout_height")));
 
         if (attributesMap.get("margin") != null) {
-            int margin = getValue("margin", 0);
+            int margin = getValue("margin", 0).intValue();
             marginLayoutParams.setMargins(margin, margin, margin, margin);
         } else
-            marginLayoutParams.setMargins(getValue("margin_left", 0), getValue("margin_top", 0), getValue("margin_right", 0), getValue("margin_bottom", 0));
+            marginLayoutParams.setMargins(getValue("margin_left", 0).intValue(), getValue("margin_top", 0).intValue(), getValue("margin_right", 0).intValue(), getValue("margin_bottom", 0).intValue());
 
         view.setLayoutParams(marginLayoutParams);
     }
@@ -118,26 +118,10 @@ public abstract class FireView {
         return Gravity.NO_GRAVITY;
     }
 
-    protected float getValue(String key, float def) {
+    protected Number getValue(String key, int def) {
         Object b;
-        if ((b = attributesMap.get(key)) != null && b instanceof Float)
-            return (float) b;
-
-        return def;
-    }
-
-    protected double getValue(String key, double def) {
-        Object b;
-        if ((b = attributesMap.get(key)) != null && b instanceof Double)
-            return (double) b;
-
-        return def;
-    }
-
-    protected int getValue(String key, int def) {
-        Object b;
-        if ((b = attributesMap.get(key)) != null && b instanceof Integer)
-            return (int) b;
+        if ((b = attributesMap.get(key)) != null && b instanceof Number)
+            return (Number) b;
 
         return def;
     }
@@ -172,7 +156,7 @@ public abstract class FireView {
                 @Override
                 public boolean onLongClick(View view) {
                     listener.onFireLayoutChildLongClicked(view);
-                    return false;
+                    return true;
                 }
             });
     }

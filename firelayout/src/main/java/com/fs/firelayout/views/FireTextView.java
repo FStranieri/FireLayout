@@ -2,6 +2,7 @@ package com.fs.firelayout.views;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,8 +27,12 @@ public class FireTextView extends FireView {
         textView.setText(getValue("text", ""));
 
         String textColor = getValue("textColor", null);
-        if (textColor != null)
+        if (!TextUtils.isEmpty(textColor))
             textView.setTextColor(Color.parseColor(textColor));
+
+        float textSize = getValue("textSize", -1).floatValue();
+        if (textSize >= 0f)
+            textView.setTextSize(textSize);
 
         textView.setGravity(getGravity("gravity"));
 

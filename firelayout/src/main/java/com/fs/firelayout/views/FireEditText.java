@@ -2,6 +2,7 @@ package com.fs.firelayout.views;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
@@ -28,8 +29,12 @@ public class FireEditText extends FireView {
         editText.setHint(getValue("hint", ""));
 
         String textColor = getValue("textColor", null);
-        if (textColor != null)
+        if (!TextUtils.isEmpty(textColor))
             editText.setTextColor(Color.parseColor(textColor));
+
+        float textSize = getValue("textSize", -1).floatValue();
+        if (textSize >= 0f)
+            editText.setTextSize(textSize);
 
         editText.setGravity(getGravity("gravity"));
 

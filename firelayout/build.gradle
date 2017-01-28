@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/FStranieri/FireLayout'
     gitUrl = 'https://github.com/FStranieri/FireLayout.git'
 
-    libraryVersion = '0.1.11'
+    libraryVersion = '0.2.0'
 
     developerId = 'fstranieri'
     developerName = 'Francesco Stranieri'
@@ -30,9 +30,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 3
-        versionName "0.1.11"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        versionCode 4
+        versionName "0.2.0"
     }
     buildTypes {
         release {
@@ -44,13 +43,9 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'com.android.support:design:25.0.1'
     compile 'com.google.firebase:firebase-database:10.0.1'
-    testCompile 'junit:junit:4.12'
 }
 
 apply plugin: 'com.google.gms.google-services'

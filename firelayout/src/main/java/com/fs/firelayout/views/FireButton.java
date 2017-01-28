@@ -2,6 +2,7 @@ package com.fs.firelayout.views;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 
@@ -26,8 +27,12 @@ public class FireButton extends FireView {
         button.setText(getValue("text", ""));
 
         String textColor = getValue("textColor", null);
-        if (textColor != null)
+        if (!TextUtils.isEmpty(textColor))
             button.setTextColor(Color.parseColor(textColor));
+
+        float textSize = getValue("textSize", -1).floatValue();
+        if (textSize >= 0f)
+            button.setTextSize(textSize);
 
         button.setGravity(getGravity("gravity"));
 
