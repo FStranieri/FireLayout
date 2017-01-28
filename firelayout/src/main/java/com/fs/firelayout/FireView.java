@@ -23,6 +23,7 @@ public abstract class FireView {
 
         resolveLayoutParams();
 
+        checkTag();
         checkPadding();
 
         String color = getValue("background", null);
@@ -32,6 +33,13 @@ public abstract class FireView {
         view.setEnabled(getValue("enable", true));
 
         view.setVisibility(getVisibility());
+    }
+
+    private void checkTag() {
+        String tag = getValue("tag", "");
+
+        if (!TextUtils.isEmpty(tag))
+            view.setTag(tag);
     }
 
     private void checkPadding() {
@@ -150,9 +158,8 @@ public abstract class FireView {
         return def;
     }
 
-    public void setEventsListener(final FireLayout.EventsListener listener)
-    {
-        if(getValue("onClick", false))
+    public void setEventsListener(final FireLayout.EventsListener listener) {
+        if (getValue("onClick", false))
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -160,7 +167,7 @@ public abstract class FireView {
                 }
             });
 
-        if(getValue("onLongClick", false))
+        if (getValue("onLongClick", false))
             view.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
