@@ -23,21 +23,33 @@ public abstract class FireView {
 
         resolveLayoutParams();
 
-        view.setPadding(getValue("padding_left", 0), getValue("padding_top", 0), getValue("padding_right", 0), getValue("padding_bottom", 0));
+        checkPadding();
 
         String color = getValue("background", null);
         if (color != null)
             view.setBackgroundColor(Color.parseColor(color));
-
 
         view.setEnabled(getValue("enable", true));
 
         view.setVisibility(getVisibility());
     }
 
+    private void checkPadding() {
+        if (map.get("padding") != null) {
+            int padding = getValue("padding", 0);
+            view.setPadding(padding, padding, padding, padding);
+        } else
+            view.setPadding(getValue("padding_left", 0), getValue("padding_top", 0), getValue("padding_right", 0), getValue("padding_bottom", 0));
+    }
+
     private void resolveLayoutParams() {
         ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(getSize(map.get("layout_width")), getSize(map.get("layout_height")));
-        marginLayoutParams.setMargins(getValue("margin_left", 0), getValue("margin_top", 0), getValue("margin_right", 0), getValue("margin_bottom", 0));
+
+        if (map.get("margin") != null) {
+            int margin = getValue("margin", 0);
+            marginLayoutParams.setMargins(margin, margin, margin, margin);
+        } else
+            marginLayoutParams.setMargins(getValue("margin_left", 0), getValue("margin_top", 0), getValue("margin_right", 0), getValue("margin_bottom", 0));
 
         view.setLayoutParams(marginLayoutParams);
     }
