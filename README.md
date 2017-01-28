@@ -5,7 +5,7 @@ FireLayout is a CoordinatorLayout linked to its refence on your Firebase Real-Ti
 
 ## Importing with Gradle
 ```
-compile 'com.fs.firelayout:firelayout:0.1.11'
+compile 'com.fs.firelayout:firelayout:0.2.0'
 ```
 
 ## Importing with Maven
@@ -13,7 +13,7 @@ compile 'com.fs.firelayout:firelayout:0.1.11'
 <dependency>
   <groupId>com.fs.firelayout</groupId>
   <artifactId>firelayout</artifactId>
-  <version>0.1.11</version>
+  <version>0.2.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -37,35 +37,60 @@ Now you have to instantiate the FireLayout:
 ...
 FirebaseDatabase database = FirebaseDatabase.getInstance();
 FireLayout fireLayout = (FireLayout) findViewById(R.id.fire1);
+
+//if you want to listen events
+fireLayout.setEventsListener(new FireLayout.EventsListener() {
+            @Override
+            public void onFireLayoutChildClicked(View view) {
+                //if you add a tag in your view, you can do some logic to identify the view
+            }
+
+            @Override
+            public void onFireLayoutChildLongClicked(View view) {
+                //if you add a tag in your view, you can do some logic to identify the view
+            }
+        });
+
 fireLayout.init(database);
 ...
 ```
 Now you're ready to build your own layout! 
 
-Example:
+Example (in sample app folder 'firelayoutSampleConf.json'):
 
 ```json
 {
-  "fire1" : {
-    "linearlayout" : {
+  "fire1": {
+    "linearlayout": {
       "layout_width": "match_parent",
-      "layout_height": "wrap_content",
+      "layout_height": "match_parent",
       "orientation": "vertical",
+      "gravity": "center",
+      "padding": 5,
       "children": {
         "textview": {
           "layout_width": "match_parent",
           "layout_height": "wrap_content",
-          "text": "Hi FireLayout",
+          "text": "Hi, FireLayout!",
           "textColor": "#FFFFFF",
-          "background": "#404040"
+          "textSize" : 20,
+          "background": "#404040",
+          "gravity" : "center",
+          "padding" : 5,
+          "onClick" : true
         },
         "button": {
+          "tag": "bt1",
           "layout_width": "wrap_content",
           "layout_height": "wrap_content",
-          "text": "Click me!",
-          "margin_top" : 10,
+          "text": "OK",
           "textColor": "#404040",
-          "background": "#FFFFFF"
+          "background": "#FFFFFF",
+          "gravity" : "center",
+          "padding" : 5,
+          "margin_top" : 10,
+          "onClick" : true,
+          "onLongClick" : true
         }
       }
     }
@@ -81,6 +106,8 @@ Views :
 
 - All  
 
+tag = "tag" (use it as identifier)
+
 layout_width = integer / "wrap_content" / "match_parent" 
 
 layout_height = integer / "wrap_content" / "match_parent" 
@@ -91,6 +118,8 @@ enable = true/false, default true
 
 visibility = "gone" / "invisible", default visible 
 
+padding = integer (if exists, other padding values won't be effective)
+
 padding_top = integer 
 
 padding_left = integer 
@@ -99,6 +128,8 @@ padding_right = integer
 
 padding_bottom = integer 
 
+margin = integer (if exists, other margin values won't be effective)
+
 margin_top = integer 
 
 margin_left = integer 
@@ -106,6 +137,10 @@ margin_left = integer
 margin_right = integer 
 
 margin_bottom = integer
+
+onClick = true/false, default false
+
+onLongClick = true/false, default false
 
 ViewGroups: 
 
@@ -131,6 +166,8 @@ Children Views :
   
   textColor = "exadecimal_code", see example
   
+  textSize = integer / double
+  
   gravity = "center" / "center_horizontal" / "center_vertical" / "bottom" / "top" / "left" / "right"
   
 - edittext (EditText) 
@@ -141,6 +178,8 @@ Children Views :
   
   textColor = "exadecimal_code", see example
   
+  textSize = integer / double
+  
   gravity = "center" / "center_horizontal" / "center_vertical" / "bottom" / "top" / "left" / "right"
   
 - button (Button) 
@@ -148,6 +187,8 @@ Children Views :
   text = "text"
   
   textColor = "exadecimal_code", see example
+  
+  textSize = integer / double
   
   gravity = "center" / "center_horizontal" / "center_vertical" / "bottom" / "top" / "left" / "right"
 
