@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/FStranieri/FireLayout'
     gitUrl = 'https://github.com/FStranieri/FireLayout.git'
 
-    libraryVersion = '0.2.0'
+    libraryVersion = '0.2.1'
 
     developerId = 'fstranieri'
     developerName = 'Francesco Stranieri'
@@ -30,8 +30,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 4
-        versionName "0.2.0"
+        versionCode 5
+        versionName "0.2.1"
     }
     buildTypes {
         release {
@@ -46,6 +46,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'com.android.support:design:25.0.1'
     compile 'com.google.firebase:firebase-database:10.0.1'
+    compile 'com.android.volley:volley:1.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

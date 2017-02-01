@@ -1,6 +1,7 @@
 package com.fs.firelayout;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -64,8 +65,8 @@ public abstract class FireView {
 
     private int getSize(Object size) {
         if (size != null) {
-            if (size instanceof Integer)
-                return (int) size;
+            if (size instanceof Number)
+                return ((Number) size).intValue();
             else if (size instanceof String) {
                 switch ((String) size) {
                     case "wrap_content":
@@ -142,6 +143,18 @@ public abstract class FireView {
         return def;
     }
 
+    protected int getResourceId(Context mContext, String key, String def, String path){
+        Resources resources = mContext.getResources();
+
+        String resource = getValue(key, def);
+        int resId = -1;
+
+        if(!TextUtils.isEmpty(resource))
+            resId = resources.getIdentifier(resource, path, mContext.getPackageName());
+
+        return resId;
+    }
+
     public void setEventsListener(final FireLayout.EventsListener listener) {
         if (getValue("onClick", false))
             view.setOnClickListener(new View.OnClickListener() {
@@ -165,32 +178,5 @@ public abstract class FireView {
 
     public View getView() {
         return view;
-    }
-
-    public enum FireViewGenerator {
-        FireTextView("textview", com.fs.firelayout.views.FireTextView.class, false),
-        FireEditText("edittext", com.fs.firelayout.views.FireEditText.class, false),
-        FireButton("button", com.fs.firelayout.views.FireButton.class, false),
-        FireLinearLayout("linearlayout", com.fs.firelayout.viewgroups.FireLinearLayout.class, true),
-        FireRelativeLayout("relativelayout", com.fs.firelayout.viewgroups.FireRelativeLayout.class, true);
-
-        String name;
-        Class<? extends FireView> viewClass;
-        boolean isViewGroup;
-
-        FireViewGenerator(String name, Class<? extends FireView> viewClass, boolean isViewGroup) {
-            this.name = name;
-            this.viewClass = viewClass;
-            this.isViewGroup = isViewGroup;
-        }
-
-        public static FireViewGenerator getFireView(String name) {
-            for (FireViewGenerator fireViewGenerator : values()) {
-                if (fireViewGenerator.name.equals(name.toLowerCase()))
-                    return fireViewGenerator;
-            }
-
-            return null;
-        }
     }
 }

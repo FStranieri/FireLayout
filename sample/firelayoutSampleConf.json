@@ -7,16 +7,24 @@
       "gravity": "center",
       "padding": 5,
       "children": {
+        "imageview": {
+          "tag": "img1",
+          "layout_width": "wrap_content",
+          "layout_height": "wrap_content",
+          "srcUrl": "https://cdn4.iconfinder.com/data/icons/google-i-o-2016/512/google_firebase-512.png",
+          "srcError": "ic_action_name",
+          "onClick": true
+        },
         "textview": {
           "layout_width": "match_parent",
           "layout_height": "wrap_content",
           "text": "Hi, FireLayout!",
           "textColor": "#FFFFFF",
-          "textSize" : 20,
+          "textSize": 20,
           "background": "#404040",
-          "gravity" : "center",
-          "padding" : 5,
-          "onClick" : true
+          "gravity": "center",
+          "padding": 5,
+          "onClick": true
         },
         "button": {
           "tag": "bt1",
@@ -25,11 +33,11 @@
           "text": "OK",
           "textColor": "#404040",
           "background": "#FFFFFF",
-          "gravity" : "center",
-          "padding" : 5,
-          "margin_top" : 10,
-          "onClick" : true,
-          "onLongClick" : true
+          "gravity": "center",
+          "padding": 5,
+          "margin_top": 10,
+          "onClick": true,
+          "onLongClick": true
         }
       }
     }

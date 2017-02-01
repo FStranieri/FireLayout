@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.fs.firelayout.utils.FireViewGenerator;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -75,7 +76,7 @@ public class FireLayout extends CoordinatorLayout {
         View view = null;
         FireView fireview = null;
 
-        FireView.FireViewGenerator fireViewGenerator = FireView.FireViewGenerator.getFireView(name);
+        FireViewGenerator fireViewGenerator = FireViewGenerator.getFireView(name);
 
         if (fireViewGenerator != null) {
             try {
