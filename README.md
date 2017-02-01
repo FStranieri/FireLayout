@@ -5,7 +5,7 @@ FireLayout is a CoordinatorLayout linked to its refence on your Firebase Real-Ti
 
 ## Importing with Gradle
 ```
-compile 'com.fs.firelayout:firelayout:0.2.0'
+compile 'com.fs.firelayout:firelayout:0.2.1'
 ```
 
 ## Importing with Maven
@@ -13,7 +13,7 @@ compile 'com.fs.firelayout:firelayout:0.2.0'
 <dependency>
   <groupId>com.fs.firelayout</groupId>
   <artifactId>firelayout</artifactId>
-  <version>0.2.0</version>
+  <version>0.2.1</version>
   <type>pom</type>
 </dependency>
 ```
@@ -68,16 +68,24 @@ Example (in sample app folder 'firelayoutSampleConf.json'):
       "gravity": "center",
       "padding": 5,
       "children": {
+        "imageview": {
+          "tag": "img1",
+          "layout_width": "wrap_content",
+          "layout_height": "wrap_content",
+          "srcUrl": "https://cdn4.iconfinder.com/data/icons/google-i-o-2016/512/google_firebase-512.png",
+          "srcError": "ic_action_name",
+          "onClick": true
+        },
         "textview": {
           "layout_width": "match_parent",
           "layout_height": "wrap_content",
           "text": "Hi, FireLayout!",
           "textColor": "#FFFFFF",
-          "textSize" : 20,
+          "textSize": 20,
           "background": "#404040",
-          "gravity" : "center",
-          "padding" : 5,
-          "onClick" : true
+          "gravity": "center",
+          "padding": 5,
+          "onClick": true
         },
         "button": {
           "tag": "bt1",
@@ -86,11 +94,11 @@ Example (in sample app folder 'firelayoutSampleConf.json'):
           "text": "OK",
           "textColor": "#404040",
           "background": "#FFFFFF",
-          "gravity" : "center",
-          "padding" : 5,
-          "margin_top" : 10,
-          "onClick" : true,
-          "onLongClick" : true
+          "gravity": "center",
+          "padding": 5,
+          "margin_top": 10,
+          "onClick": true,
+          "onLongClick": true
         }
       }
     }
@@ -191,6 +199,20 @@ Children Views :
   textSize = integer / double
   
   gravity = "center" / "center_horizontal" / "center_vertical" / "bottom" / "top" / "left" / "right"
+
+- imageview (ImageView)
+  
+  src = "name of drawable, in drawable folders"
+  
+  srcUrl = "url to image", not effective if src is set
+  
+  srcError = "name of drawable, in drawable folders", this is your image when srcUrl fails and It's not effective if src is   set
+  
+  adjustViewBounds = boolean, default false
+  
+  scaleType = "scaletype", accepted values : "CENTER", "CENTER_CROP", "CENTER_INSIDE", "FIT_CENTER", "FIT_END", "FIT_START",   "FIT_XY", "MATRIX". Default is CENTER_INSIDE.
+  
+  colorFilter = "exadecimal_code", see example
 
 ## LICENSE
 
