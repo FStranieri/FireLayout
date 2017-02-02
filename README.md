@@ -213,6 +213,10 @@ Children Views :
   scaleType = "scaletype", accepted values : "CENTER", "CENTER_CROP", "CENTER_INSIDE", "FIT_CENTER", "FIT_END", "FIT_START",   "FIT_XY", "MATRIX". Default is CENTER_INSIDE.
   
   colorFilter = "exadecimal_code", see example
+  
+  maxHeight = number
+  
+  maxWidth = number
 
 ## LICENSE
 
