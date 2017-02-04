@@ -5,7 +5,7 @@ FireLayout is a CoordinatorLayout linked to its refence on your Firebase Real-Ti
 
 ## Importing with Gradle
 ```
-compile 'com.fs.firelayout:firelayout:0.2.1'
+compile 'com.fs.firelayout:firelayout:0.2.5'
 ```
 
 ## Importing with Maven
@@ -13,7 +13,7 @@ compile 'com.fs.firelayout:firelayout:0.2.1'
 <dependency>
   <groupId>com.fs.firelayout</groupId>
   <artifactId>firelayout</artifactId>
-  <version>0.2.1</version>
+  <version>0.2.5</version>
   <type>pom</type>
 </dependency>
 ```
@@ -61,44 +61,51 @@ Example (in sample app folder 'firelayoutSampleConf.json'):
 ```json
 {
   "fire1": {
-    "linearlayout": {
+    "relativelayout": {
       "layout_width": "match_parent",
       "layout_height": "match_parent",
-      "orientation": "vertical",
-      "gravity": "center",
       "padding": 5,
       "children": {
-        "imageview": {
-          "tag": "img1",
-          "layout_width": "wrap_content",
-          "layout_height": "wrap_content",
-          "srcUrl": "https://cdn4.iconfinder.com/data/icons/google-i-o-2016/512/google_firebase-512.png",
-          "srcError": "ic_action_name",
-          "onClick": true
-        },
-        "textview": {
+        "linearlayout": {
           "layout_width": "match_parent",
           "layout_height": "wrap_content",
-          "text": "Hi, FireLayout!",
-          "textColor": "#FFFFFF",
-          "textSize": 20,
-          "background": "#404040",
+          "orientation": "vertical",
+          "center_in_parent": true,
           "gravity": "center",
-          "padding": 5,
-          "onClick": true
-        },
-        "button": {
-          "tag": "bt1",
-          "layout_width": "wrap_content",
-          "layout_height": "wrap_content",
-          "text": "OK",
-          "textColor": "#404040",
-          "background": "#FFFFFF",
-          "gravity": "center",
-          "padding": 5,
-          "margin_top": 10,
-          "onClick": true,
-          "onLongClick": true
+          "children": {
+            "imageview": {
+              "tag": "img1",
+              "layout_width": "wrap_content",
+              "layout_height": "wrap_content",
+              "srcUrl": "https://cdn4.iconfinder.com/data/icons/google-i-o-2016/512/google_firebase-512.png",
+              "srcError": "ic_action_name",
+              "onClick": true
+            },
+            "textview": {
+              "layout_width": "match_parent",
+              "layout_height": "wrap_content",
+              "text": "Hi, FireLayout!",
+              "textColor": "#FFFFFF",
+              "textSize": 20,
+              "background": "#404040",
+              "gravity": "center",
+              "padding": 5,
+              "onClick": true
+            },
+            "button": {
+              "tag": "bt1",
+              "layout_width": "wrap_content",
+              "layout_height": "wrap_content",
+              "text": "OK",
+              "textColor": "#404040",
+              "background": "#FFFFFF",
+              "gravity": "center",
+              "padding": 5,
+              "margin_top": 10,
+              "onClick": true,
+              "onLongClick": true
+            }
+          }
         }
       }
     }
@@ -165,6 +172,26 @@ ViewGroups:
 - relativelayout (RelativeLayout) 
 
   gravity = "center" / "center_horizontal" / "center_vertical" / "bottom" / "top" / "left" / "right"
+  
+  RelativeLayout has optional rules for its children, so in your child object you can add following (see json sample): 
+  
+  align_parent_left = true / false, default false
+  
+  align_parent_top = true / false, default false
+  
+  align_parent_right = true / false, default false
+  
+  align_parent_bottom = true / false, default false
+  
+  align_parent_start = true / false, default false
+  
+  align_parent_end = true / false, default false
+  
+  center_in_parent = true / false, default false
+  
+  center_horizontal = true / false, default false
+  
+  center_vertical = true / false, default false
   
 Children Views :
 
