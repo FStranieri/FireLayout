@@ -12,6 +12,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
 import com.fs.firelayout.FireView;
+import com.fs.firelayout.utils.FireViewUtils;
 
 import java.util.HashMap;
 
@@ -31,9 +32,9 @@ public class FireImageView extends FireView {
 
         loadImage(imageView, mContext);
 
-        imageView.setAdjustViewBounds(getValue("adjustViewBounds", false));
+        imageView.setAdjustViewBounds(FireViewUtils.getValue(attributesMap.get("adjustViewBounds"), false));
 
-        String colorFilter = getValue("colorFilter", "");
+        String colorFilter = FireViewUtils.getValue(attributesMap.get("colorFilter"), "");
 
         if (!TextUtils.isEmpty(colorFilter))
             imageView.setColorFilter(Color.parseColor(colorFilter));
@@ -42,18 +43,18 @@ public class FireImageView extends FireView {
     }
 
     private void loadImage(final ImageView imageView, Context mContext) {
-        int srcId = getResourceId(mContext, "src", "", "drawable");
+        int srcId = FireViewUtils.getResourceId(mContext, attributesMap.get("src"), "", "drawable");
 
         if (srcId != -1) {
             imageView.setImageResource(srcId);
             imageView.setScaleType(getScaleType());
-            imageView.setMaxWidth(getValue("maxWidth", 0).intValue());
-            imageView.setMaxHeight(getValue("maxHeight", 0).intValue());
+            imageView.setMaxWidth(FireViewUtils.getValue(attributesMap.get("maxWidth"), 0).intValue());
+            imageView.setMaxHeight(FireViewUtils.getValue(attributesMap.get("maxHeight"), 0).intValue());
         } else {
-            String srcUrl = getValue("srcUrl", "");
+            String srcUrl = FireViewUtils.getValue(attributesMap.get("srcUrl"), "");
 
             if (!TextUtils.isEmpty(srcUrl)) {
-                final int srcErrorId = getResourceId(mContext, "srcError", "", "drawable");
+                final int srcErrorId = FireViewUtils.getResourceId(mContext, attributesMap.get("srcError"), "", "drawable");
 
                 ImageRequest imageRequest = new ImageRequest(srcUrl,
                         new Response.Listener<Bitmap>() {
@@ -61,7 +62,7 @@ public class FireImageView extends FireView {
                             public void onResponse(Bitmap bitmap) {
                                 imageView.setImageBitmap(bitmap);
                             }
-                        }, getValue("maxWidth", 0).intValue(), getValue("maxHeight", 0).intValue(), getScaleType(), null,
+                        }, FireViewUtils.getValue(attributesMap.get("maxWidth"), 0).intValue(), FireViewUtils.getValue(attributesMap.get("maxHeight"), 0).intValue(), getScaleType(), null,
                         new Response.ErrorListener() {
                             public void onErrorResponse(VolleyError error) {
                                 if (srcErrorId != -1)
@@ -75,7 +76,7 @@ public class FireImageView extends FireView {
     }
 
     private ImageView.ScaleType getScaleType() {
-        String scale = getValue("scaleType", "CENTER_INSIDE");
+        String scale = FireViewUtils.getValue(attributesMap.get("scaleType"), "CENTER_INSIDE");
 
         ImageView.ScaleType scaleType = ImageView.ScaleType.valueOf(scale.toUpperCase());
 

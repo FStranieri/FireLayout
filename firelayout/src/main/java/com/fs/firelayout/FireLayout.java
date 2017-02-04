@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fs.firelayout.utils.FireViewGenerator;
+import com.fs.firelayout.utils.FireViewUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -66,7 +67,10 @@ public class FireLayout extends CoordinatorLayout {
                     View view = getRealView(key, (HashMap<String, Object>) childMap);
 
                     if (view != null)
+                    {
+                        FireViewUtils.setLayoutParamsForParent(parent, view, (HashMap<String, Object>) childMap);
                         parent.addView(view);
+                    }
                 }
             }
         }

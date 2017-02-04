@@ -7,6 +7,9 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+
+import com.fs.firelayout.utils.FireViewUtils;
 
 import java.util.HashMap;
 
@@ -27,17 +30,17 @@ public abstract class FireView {
         checkTag();
         checkPadding();
 
-        String color = getValue("background", null);
+        String color = FireViewUtils.getValue(attributesMap.get("background"), null);
         if (color != null)
             view.setBackgroundColor(Color.parseColor(color));
 
-        view.setEnabled(getValue("enable", true));
+        view.setEnabled(FireViewUtils.getValue(attributesMap.get("enable"), true));
 
         view.setVisibility(getVisibility());
     }
 
     private void checkTag() {
-        String tag = getValue("tag", "");
+        String tag = FireViewUtils.getValue(attributesMap.get("tag"), "");
 
         if (!TextUtils.isEmpty(tag))
             view.setTag(tag);
@@ -45,20 +48,20 @@ public abstract class FireView {
 
     private void checkPadding() {
         if (attributesMap.get("padding") != null) {
-            int padding = getValue("padding", 0).intValue();
+            int padding = FireViewUtils.getValue(attributesMap.get("padding"), 0).intValue();
             view.setPadding(padding, padding, padding, padding);
         } else
-            view.setPadding(getValue("padding_left", 0).intValue(), getValue("padding_top", 0).intValue(), getValue("padding_right", 0).intValue(), getValue("padding_bottom", 0).intValue());
+            view.setPadding(FireViewUtils.getValue(attributesMap.get("padding_left"), 0).intValue(), FireViewUtils.getValue(attributesMap.get("padding_top"), 0).intValue(), FireViewUtils.getValue(attributesMap.get("padding_right"), 0).intValue(), FireViewUtils.getValue(attributesMap.get("padding_bottom"), 0).intValue());
     }
 
     private void resolveLayoutParams() {
         ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(getSize(attributesMap.get("layout_width")), getSize(attributesMap.get("layout_height")));
 
         if (attributesMap.get("margin") != null) {
-            int margin = getValue("margin", 0).intValue();
+            int margin = FireViewUtils.getValue(attributesMap.get("margin"), 0).intValue();
             marginLayoutParams.setMargins(margin, margin, margin, margin);
         } else
-            marginLayoutParams.setMargins(getValue("margin_left", 0).intValue(), getValue("margin_top", 0).intValue(), getValue("margin_right", 0).intValue(), getValue("margin_bottom", 0).intValue());
+            marginLayoutParams.setMargins(FireViewUtils.getValue(attributesMap.get("margin_left"), 0).intValue(), FireViewUtils.getValue(attributesMap.get("margin_top"), 0).intValue(), FireViewUtils.getValue(attributesMap.get("margin_right"), 0).intValue(), FireViewUtils.getValue(attributesMap.get("margin_bottom"), 0).intValue());
 
         view.setLayoutParams(marginLayoutParams);
     }
@@ -119,44 +122,8 @@ public abstract class FireView {
         return Gravity.NO_GRAVITY;
     }
 
-    protected Number getValue(String key, int def) {
-        Object b;
-        if ((b = attributesMap.get(key)) != null && b instanceof Number)
-            return (Number) b;
-
-        return def;
-    }
-
-    protected Boolean getValue(String key, boolean def) {
-        Object b;
-        if ((b = attributesMap.get(key)) != null && b instanceof Boolean)
-            return (Boolean) b;
-
-        return def;
-    }
-
-    protected String getValue(String key, String def) {
-        Object s;
-        if ((s = attributesMap.get(key)) != null && s instanceof String)
-            return (String) s;
-
-        return def;
-    }
-
-    protected int getResourceId(Context mContext, String key, String def, String path){
-        Resources resources = mContext.getResources();
-
-        String resource = getValue(key, def);
-        int resId = -1;
-
-        if(!TextUtils.isEmpty(resource))
-            resId = resources.getIdentifier(resource, path, mContext.getPackageName());
-
-        return resId;
-    }
-
     public void setEventsListener(final FireLayout.EventsListener listener) {
-        if (getValue("onClick", false))
+        if (FireViewUtils.getValue(attributesMap.get("onClick"), false))
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -164,7 +131,7 @@ public abstract class FireView {
                 }
             });
 
-        if (getValue("onLongClick", false))
+        if (FireViewUtils.getValue(attributesMap.get("onLongClick"), false))
             view.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.fs.firelayout.FireView;
+import com.fs.firelayout.utils.FireViewUtils;
 
 import java.util.HashMap;
 
@@ -24,13 +25,13 @@ public class FireButton extends FireView {
     public View generateView(Context mContext) {
         Button button = new Button(mContext);
 
-        button.setText(getValue("text", ""));
+        button.setText(FireViewUtils.getValue(attributesMap.get("text"), ""));
 
-        String textColor = getValue("textColor", null);
+        String textColor = FireViewUtils.getValue(attributesMap.get("textColor"), null);
         if (!TextUtils.isEmpty(textColor))
             button.setTextColor(Color.parseColor(textColor));
 
-        float textSize = getValue("textSize", -1).floatValue();
+        float textSize = FireViewUtils.getValue(attributesMap.get("textSize"), -1).floatValue();
         if (textSize >= 0f)
             button.setTextSize(textSize);
 
